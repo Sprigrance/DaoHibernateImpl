@@ -15,7 +15,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void createUsersTable() {
         try (Connection connection = Util.getConnectionWithJDBC();
              PreparedStatement preparedStatement = connection.prepareStatement(
-                     "CREATE TABLE users (" +
+                     "CREATE TABLE IF NOT EXISTS users (" +
                              "id BIGINT PRIMARY KEY AUTO_INCREMENT, " +
                              "name VARCHAR(80), " +
                              "lastname VARCHAR(100), " +
@@ -49,22 +49,11 @@ public class UserDaoJDBCImpl implements UserDao {
             preparedStatement.setString(2, lastName);
             preparedStatement.setInt(3, age);
             preparedStatement.executeUpdate();
+            System.out.println("User с именем – " + name + " добавлен в базу данных");
 
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
-//        try (Connection connection = Util.getConnectionWithJDBC();
-//             Statement statement = connection.createStatement()) {
-//
-//            statement.execute("INSERT INTO users(name, lastname, age) VALUES("
-//                    + name + ", "
-//                    + lastName + ", "
-//                    + age + ");"
-//            );
-//
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
     }
 
     public void removeUserById(long id) {
@@ -78,14 +67,6 @@ public class UserDaoJDBCImpl implements UserDao {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
-//        try (Connection connection = Util.getConnectionWithJDBC();
-//             Statement statement = connection.createStatement()) {
-//
-//            statement.executeUpdate("DELETE FROM users WHERE id = " + id);
-//
-//        } catch (SQLException throwables) {
-//            throwables.printStackTrace();
-//        }
     }
 
     public List<User> getAllUsers() {
@@ -97,12 +78,12 @@ public class UserDaoJDBCImpl implements UserDao {
 
             ResultSet rs = preparedStatement.executeQuery();
             while (rs.next()) {
-//                long id = rs.getLong("id");
+                long id = rs.getLong("id");
                 String name = rs.getString("name");
                 String lastName = rs.getString("lastname");
                 byte age = rs.getByte("age");
 
-                userList.add(new User(name, lastName, age));
+                userList.add(new User(id, name, lastName, age));
             }
 
         } catch (SQLException exception) {
