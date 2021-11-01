@@ -1,7 +1,7 @@
 package jm.task.core.jdbc;
 
 import jm.task.core.jdbc.service.UserServiceImpl;
-w
+
 public class Main {
     public static void main(String[] args) {
         UserServiceImpl service = new UserServiceImpl();
