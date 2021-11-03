@@ -22,12 +22,21 @@
     </build>
 
     <dependencies>
+<<<<<<< HEAD
          <dependency>
              <groupId>junit</groupId>
              <artifactId>junit</artifactId>
              <version>4.13.2</version>
              <scope>test</scope>
          </dependency>
+=======
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+>>>>>>> cb46f562311a3c439a14b680c18f75397a0d0b9a
 
         <dependency>
             <groupId>mysql</groupId>
@@ -46,6 +55,6 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.5.8.Final</version>
         </dependency>
-     </dependencies>
+    </dependencies>
 
 </project>
